@@ -7,9 +7,11 @@ window.onload=function(){
 //position de mon joueur
 positionx=positiony=10;
 gs=tc=20;
+// tc=40
 //taille de la pomme que le serpent vas manger
-ax=ay=15;
+pommex=pommey=10;
 
+pommebonusx=pommebonusy=5;
 //vitesse du joueur v
 xv=yv=0;
 
@@ -22,23 +24,26 @@ tail = 5;
 function game(){
     positionx+=xv;
     positiony+=yv;
-    if(positionx<0) {
+    if(positionx<0) {           //quand il vas a gauche
         positionx = tc-1;
     }
-    if(positionx> tc-1) {
+    if(positionx> tc-1) {       //quand tu vas a droite
         positionx = 0
     }
     if(positiony<0) {
-        positiony = tc-1;
+        positiony = tc-1;   //quand tu vas vers le ahut
     }
-    if(positiony>tc-1) {
+    if(positiony>tc-1) {    //quand tu vas en bas
         positiony = 0;
     }
     ctx.fillStyle="black";
     ctx.fillRect(0,0,canv.width,canv.height); //couleur du background
 
-    ctx.fillStyle="yellow";
+    ctx.fillStyle="#009966";
     for(let i=0; i<trail.length; i++){
+        if (i==trail.length-1) {
+            ctx.fillStyle="#006600"
+        }
         ctx.fillRect(trail[i].x*gs, trail[i].y*gs, gs-2, gs-2); //couleur du serpent
 
         if(trail[i].x==positionx && trail[i].y==positiony){
@@ -49,15 +54,28 @@ trail.push({x:positionx,y:positiony});
 while(trail.length>tail){
 trail.shift(); // ajoute la pomme a la fin de mon tableau (serpent)
 }
-if(ax==positionx && ay==positiony){
-    tail++;
-    ax=Math.floor(Math.random()*tc);
-    ay=Math.floor(Math.random()*tc);//si il touche la pomme il s'incremente d'un carré
+if(pommex==positionx && pommey==positiony){
+    tail++;//si il touche la pomme il s'incremente d'un carré
+    pommex=Math.floor(Math.random()*tc);
+    pommey=Math.floor(Math.random()*tc);
 }
+if (pommebonusx==positionx && pommebonusy==positiony
+    && tail%5==0){
+    tail+=2 
+    pommebonusx=Math.floor(Math.random()*tc);
+    pommebonusy=Math.floor(Math.random()*tc);
+    }
 
-    ctx.fillStyle="red";
-    ctx.fillRect(ax*gs, ay*gs, gs-2, gs-2); //couleur de la pomme
+    ctx.fillStyle="#990033";//couleur de la pomme
+    ctx.fillRect(pommex*gs, pommey*gs, gs-2, gs-2); 
 
+    //pommebonus
+    if (tail%5==0) { //quand le joueur mange 5 pommes la pomme bonus apparrait 
+        ctx.fillStyle="red";
+    ctx.fillRect(pommebonusx*gs, pommebonusy*gs, gs-2, gs-2);
+    console.log(pommebonusx, pommebonusy);
+    }
+    
 }
 // touche attribuer pour bouger le serpent haut, bas, gauche, droite
 function keyPush(evt){
