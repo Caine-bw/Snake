@@ -27,10 +27,10 @@ let score = 0;
 function game(){
     positionx+=xv;
     positiony+=yv;
-    if(positionx<0) {           //quand il vas a gauche
+    if(positionx<0) {       //quand il vas a gauche
         positionx = tc-1;
     }
-    if(positionx> tc-1) {       //quand tu vas a droite
+    if(positionx> tc-1) {   //quand tu vas a droite
         positionx = 0
     }
     if(positiony<0) {
@@ -42,10 +42,11 @@ function game(){
     ctx.fillStyle="black";
     ctx.fillRect(0,0,canv.width,canv.height); //couleur du background
 
-    ctx.fillStyle="#009966";
+    ctx.fillStyle="#009966";//couleur de la queue du serpent(carré ajouter quand tu mange la pomme)
     for(let i=0; i<trainee.length; i++){
         if (i==trainee.length-1) {
-            ctx.fillStyle="#7CFC00";
+            
+            ctx.fillStyle="#7CFC00, border-radius: 3px";
         }
         if (i==trainee.length-2) {
             ctx.fillStyle="#ADFF2F"
@@ -63,7 +64,6 @@ function game(){
         corps =5;
         score = 0 // 
         positionx=positiony=10;//il reprends sa position de depart
-         
         }
     }
 trainee.push({x:positionx,y:positiony});
@@ -78,7 +78,7 @@ if(pommex==positionx && pommey==positiony){
 }
 if (pommebonusx==positionx && pommebonusy==positiony
     && corps%5==0){
-    corps+=2 
+    corps+=2 //si le joueur mange la pomme d'or il s'incremente de 2, si il mange l'autre pomme, la pomme d'or disparait
     pommebonusx=Math.floor(Math.random()*tc);
     pommebonusy=Math.floor(Math.random()*tc);
     score+=2;
@@ -94,6 +94,7 @@ if (pommebonusx==positionx && pommebonusy==positiony
     
     }
     drawScore()
+    drawpomme()
 }
 // touche attribuer pour bouger le serpent haut, bas, gauche, droite
 function keyPush(evt){
@@ -112,11 +113,21 @@ function keyPush(evt){
             break;
     }
 }
-
+//tableau des scores
+function drawpomme() {
+    if (
+        pommebonusx !== positionx && pommebonusy !== positiony
+    ) {
+    ctx.font = "16px math";
+    ctx.fillStyle = "white";
+    ctx.fillText("Prends la pomme d'or vite !!! ", 8, 20);
+    }
+    
+}
 function drawScore() {
     ctx.font = "16px math";
     ctx.fillStyle = "white";
-    ctx.fillText("TON SCORE DE GROS NOOB: "+ score.toString().padStart(4, '0'), 8, 20);
+    ctx.fillText("TON SCORE DE GROS NOOB: "+ score.toString().padStart(4, '0'), 8, 395);
 }
 // string = tranfsorm mon entier en string pour faire apparaitre 0000 
 
