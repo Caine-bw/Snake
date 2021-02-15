@@ -9,9 +9,9 @@ positionx=positiony=10;
 gs=tc=20;
 // tc=40
 //taille de la pomme que le serpent vas manger
-pommex=pommey=10;
+pommex=pommey=2;
 
-pommebonusx=pommebonusy=5;
+pommebonusx=pommebonusy=15;
 //vitesse du joueur v
 xv=yv=0;
 
@@ -53,9 +53,9 @@ function game(){
             ctx.fillStyle="#7FFF00"
         }
         if (i==trail.length-4) {
-            ctx.fillStyle=" #00FF00"
+            ctx.fillStyle=" #00FF00"//couleur du serpent
         }
-        ctx.fillRect(trail[i].x*gs, trail[i].y*gs, gs-2, gs-2); //couleur du serpent
+        ctx.fillRect(trail[i].x*gs, trail[i].y*gs, gs-2, gs-2); 
 
         if(trail[i].x==positionx && trail[i].y==positiony){
         tail =5; //conditions si le joueurs se touche, le jeu se reinitialise il reprends sa forme du debut 
@@ -88,7 +88,7 @@ if (pommebonusx==positionx && pommebonusy==positiony
     ctx.fillRect(pommebonusx*gs, pommebonusy*gs, gs-2, gs-2);
     
     }
-    
+    drawScore()
 }
 // touche attribuer pour bouger le serpent haut, bas, gauche, droite
 function keyPush(evt){
@@ -109,8 +109,8 @@ function keyPush(evt){
 }
 
 function drawScore() {
-    ctx.font = "16px Arial";
-    ctx.fillStyle = "#0095DD";
-    ctx.fillText("Score: "+score, 8, 20);
-}
+    ctx.font = "16px cursive italic";
+    ctx.fillStyle = "white";
+    ctx.fillText("Ton score de gros Noob: "+ score.toString().padStart(4, '0'), 8, 20);
+}// string = tranfsorm mon entier en string pour faire apparaitre 0000 
 
