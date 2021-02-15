@@ -19,6 +19,8 @@ xv=yv=0;
 trail =[],
 tail = 5;
 
+//scoreboard
+let score = 0;
 //fonction du jeu 
 
 function game(){
@@ -31,7 +33,7 @@ function game(){
         positionx = 0
     }
     if(positiony<0) {
-        positiony = tc-1;   //quand tu vas vers le ahut
+        positiony = tc-1;   //quand tu vas vers le haut
     }
     if(positiony>tc-1) {    //quand tu vas en bas
         positiony = 0;
@@ -42,7 +44,16 @@ function game(){
     ctx.fillStyle="#009966";
     for(let i=0; i<trail.length; i++){
         if (i==trail.length-1) {
-            ctx.fillStyle="#006600"
+            ctx.fillStyle="#7CFC00"
+        }
+        if (i==trail.length-2) {
+            ctx.fillStyle="#ADFF2F"
+        }
+        if (i==trail.length-3) {
+            ctx.fillStyle="#7FFF00"
+        }
+        if (i==trail.length-4) {
+            ctx.fillStyle=" #00FF00"
         }
         ctx.fillRect(trail[i].x*gs, trail[i].y*gs, gs-2, gs-2); //couleur du serpent
 
@@ -58,22 +69,24 @@ if(pommex==positionx && pommey==positiony){
     tail++;//si il touche la pomme il s'incremente d'un carré
     pommex=Math.floor(Math.random()*tc);
     pommey=Math.floor(Math.random()*tc);
+    score++;
 }
 if (pommebonusx==positionx && pommebonusy==positiony
     && tail%5==0){
     tail+=2 
     pommebonusx=Math.floor(Math.random()*tc);
     pommebonusy=Math.floor(Math.random()*tc);
-    }
+    score+=2;
+}
 
     ctx.fillStyle="#990033";//couleur de la pomme
     ctx.fillRect(pommex*gs, pommey*gs, gs-2, gs-2); 
 
     //pommebonus
     if (tail%5==0) { //quand le joueur mange 5 pommes la pomme bonus apparrait 
-        ctx.fillStyle="red";
+        ctx.fillStyle="#FFD700"; //pomme d'or
     ctx.fillRect(pommebonusx*gs, pommebonusy*gs, gs-2, gs-2);
-    console.log(pommebonusx, pommebonusy);
+    
     }
     
 }
@@ -94,3 +107,10 @@ function keyPush(evt){
             break;
     }
 }
+
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Score: "+score, 8, 20);
+}
+
