@@ -4,6 +4,7 @@ window.onload=function(){
     document.addEventListener("keydown",keyPush);
     setInterval(game,1000/15); //faire bouger le serpent de 15 toutes les secondes
 }
+
 //position de mon joueur
 positionx=positiony=10;
 gs=tc=20;
@@ -16,8 +17,8 @@ pommebonusx=pommebonusy=15;
 xv=yv=0;
 
 //corps du joueur
-trail =[],
-tail = 5;
+trainee =[],
+corps = 5;
 
 //scoreboard
 let score = 0;
@@ -42,38 +43,38 @@ function game(){
     ctx.fillRect(0,0,canv.width,canv.height); //couleur du background
 
     ctx.fillStyle="#009966";
-    for(let i=0; i<trail.length; i++){
-        if (i==trail.length-1) {
-            ctx.fillStyle="#7CFC00"
+    for(let i=0; i<trainee.length; i++){
+        if (i==trainee.length-1) {
+            ctx.fillStyle="#7CFC00";
         }
-        if (i==trail.length-2) {
+        if (i==trainee.length-2) {
             ctx.fillStyle="#ADFF2F"
         }
-        if (i==trail.length-3) {
+        if (i==trainee.length-3) {
             ctx.fillStyle="#7FFF00"
         }
-        if (i==trail.length-4) {
+        if (i==trainee.length-4) {
             ctx.fillStyle=" #00FF00"//couleur du serpent
         }
-        ctx.fillRect(trail[i].x*gs, trail[i].y*gs, gs-2, gs-2); 
+        ctx.fillRect(trainee[i].x*gs, trainee[i].y*gs, gs-2, gs-2); 
 
-        if(trail[i].x==positionx && trail[i].y==positiony){
-        tail =5; //conditions si le joueurs se touche, le jeu se reinitialise il reprends sa forme du debut 
+        if(trainee[i].x==positionx && trainee[i].y==positiony){
+        corps =5; //conditions si le joueurs se touche, le jeu se reinitialise il reprends sa forme du debut 
         }
     }
-trail.push({x:positionx,y:positiony});
-while(trail.length>tail){
-trail.shift(); // ajoute la pomme a la fin de mon tableau (serpent)
+trainee.push({x:positionx,y:positiony});
+while(trainee.length>corps){
+trainee.shift(); // ajoute la pomme a la fin de mon tableau (serpent)
 }
 if(pommex==positionx && pommey==positiony){
-    tail++;//si il touche la pomme il s'incremente d'un carré
+    corps++;//si il touche la pomme il s'incremente d'un carré
     pommex=Math.floor(Math.random()*tc);
     pommey=Math.floor(Math.random()*tc);
     score++;
 }
 if (pommebonusx==positionx && pommebonusy==positiony
-    && tail%5==0){
-    tail+=2 
+    && corps%5==0){
+    corps+=2 
     pommebonusx=Math.floor(Math.random()*tc);
     pommebonusy=Math.floor(Math.random()*tc);
     score+=2;
@@ -83,7 +84,7 @@ if (pommebonusx==positionx && pommebonusy==positiony
     ctx.fillRect(pommex*gs, pommey*gs, gs-2, gs-2); 
 
     //pommebonus
-    if (tail%5==0) { //quand le joueur mange 5 pommes la pomme bonus apparrait 
+    if (corps%5==0) { //quand le joueur mange 5 pommes la pomme bonus apparrait 
         ctx.fillStyle="#FFD700"; //pomme d'or
     ctx.fillRect(pommebonusx*gs, pommebonusy*gs, gs-2, gs-2);
     
@@ -109,8 +110,9 @@ function keyPush(evt){
 }
 
 function drawScore() {
-    ctx.font = "16px cursive italic";
+    ctx.font = "16px math";
     ctx.fillStyle = "white";
-    ctx.fillText("Ton score de gros Noob: "+ score.toString().padStart(4, '0'), 8, 20);
-}// string = tranfsorm mon entier en string pour faire apparaitre 0000 
+    ctx.fillText("TON SCORE DE GROS NOOB: "+ score.toString().padStart(4, '0'), 8, 20);
+}
+// string = tranfsorm mon entier en string pour faire apparaitre 0000 
 
