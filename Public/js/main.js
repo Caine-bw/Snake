@@ -2,7 +2,7 @@ window.onload=function(){
     canv=document.getElementById("ecran");
     ctx=canv.getContext("2d");
     document.addEventListener("keydown",keyPush);
-    setInterval(game,1000/15); //faire bouger le serpent de 15 toutes les secondes
+    var interval = setInterval(game,1000/15); //faire bouger le serpent de 15 toutes les secondes
 }
 
 //position de mon joueur
@@ -58,8 +58,12 @@ function game(){
         }
         ctx.fillRect(trainee[i].x*gs, trainee[i].y*gs, gs-2, gs-2); 
 
+//conditions si le joueurs se touche, le jeu se reinitialise il reprends sa forme du debut 
         if(trainee[i].x==positionx && trainee[i].y==positiony){
-        corps =5; //conditions si le joueurs se touche, le jeu se reinitialise il reprends sa forme du debut 
+        corps =5;
+        score = 0 // 
+        positionx=positiony=10;//il reprends sa position de depart
+         
         }
     }
 trainee.push({x:positionx,y:positiony});
