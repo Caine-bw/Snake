@@ -114,16 +114,16 @@ function keyPush(evt){
     }
 }
 //tableau des scores
-function drawpomme() {
-    if (
-        pommebonusx !== positionx && pommebonusy !== positiony
-    ) {
-    ctx.font = "16px math";
-    ctx.fillStyle = "white";
-    ctx.fillText("Prends la pomme d'or vite !!! ", 8, 20);
-    }
+// function drawpomme() {
+//     if (
+//         pommebonusx !== positionx && pommebonusy !== positiony
+//     ) {
+//     ctx.font = "16px math";
+//     ctx.fillStyle = "white";
+//     ctx.fillText("Prends la pomme d'or vite !!! ", 8, 20);
+//     }
     
-}
+// }
 function drawScore() {
     ctx.font = "16px math";
     ctx.fillStyle = "white";
