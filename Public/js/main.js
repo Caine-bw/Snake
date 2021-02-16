@@ -45,9 +45,9 @@ function game(){
     var my_gradient = ctx.createLinearGradient(0, 0, 0, 170);
     my_gradient.addColorStop(0, "#1453D8");
     my_gradient.addColorStop(0, "#14D8B4");
-    my_gradient.addColorStop(1, "#FF1212");
-    my_gradient.addColorStop(1, "#5B14D8");// dégrader de couleurs selon la position de la queue du serpent
-    
+    my_gradient.addColorStop(1, "#5B14D8");
+    my_gradient.addColorStop(1, "#5714D8");// dégrader de couleurs selon la position de la queue du serpent
+     my_gradient.addColorStop(1, "#FF1212");
     ctx.fillStyle = my_gradient;//couleur de la queue du serpent(carré ajouter quand tu mange la pomme)
     for(let i=0; i<trainee.length; i++){
         if (i==trainee.length-1) {
@@ -131,7 +131,7 @@ function keyPush(evt){
 function drawScore() {
     ctx.font = "16px math";
     ctx.fillStyle = "white";
-    ctx.fillText("TON SCORE DE GROS NOOB: "+ score.toString().padStart(4, '0'), 8, 395);
+    ctx.fillText("Road to glandeur pro: "+ score.toString().padStart(4, '0'), 8, 395);
 }
 // string = tranfsorm mon entier en string pour faire apparaitre 0000 
 
