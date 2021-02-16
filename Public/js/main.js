@@ -7,7 +7,7 @@ window.onload=function(){
 
 //position de mon joueur
 positionx=positiony=10;
-gs=tc=20;
+gs=tc=20; //gs = taille en pixels sur mon canvas
 // tc=40
 //taille de la pomme que le serpent vas manger
 pommex=pommey=2;
@@ -42,11 +42,16 @@ function game(){
     ctx.fillStyle="black";
     ctx.fillRect(0,0,canv.width,canv.height); //couleur du background
 
-    ctx.fillStyle="#009966";//couleur de la queue du serpent(carré ajouter quand tu mange la pomme)
+    var my_gradient = ctx.createLinearGradient(0, 0, 0, 170);
+    my_gradient.addColorStop(0, "#1453D8");
+    my_gradient.addColorStop(0, "#14D8B4");
+    my_gradient.addColorStop(1, "#FF1212");
+    my_gradient.addColorStop(1, "#5B14D8");// dégrader de couleurs selon la position de la queue du serpent
+    
+    ctx.fillStyle = my_gradient;//couleur de la queue du serpent(carré ajouter quand tu mange la pomme)
     for(let i=0; i<trainee.length; i++){
         if (i==trainee.length-1) {
-            
-            ctx.fillStyle="#7CFC00, border-radius: 3px";
+            ctx.fillStyle="#7CFC00";
         }
         if (i==trainee.length-2) {
             ctx.fillStyle="#ADFF2F"
@@ -85,13 +90,12 @@ if (pommebonusx==positionx && pommebonusy==positiony
 }
 
     ctx.fillStyle="#990033";//couleur de la pomme
-    ctx.fillRect(pommex*gs, pommey*gs, gs-2, gs-2); 
+    ctx.fillRect(pommex*gs, pommey*gs, gs-6, gs-6); //gs -6 donc pomme pomme rouge plus petite que la d'or
 
     //pommebonus
     if (corps%5==0) { //quand le joueur mange 5 pommes la pomme bonus apparrait 
         ctx.fillStyle="#FFD700"; //pomme d'or
-    ctx.fillRect(pommebonusx*gs, pommebonusy*gs, gs-2, gs-2);
-    
+        ctx.fillRect(pommebonusx*gs, pommebonusy*gs, gs-3, gs-3);
     }
     drawScore()
     drawpomme()
